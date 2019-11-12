@@ -1,0 +1,20 @@
+html
+    head
+        title Login
+        link(rel='stylesheet', href='/css/login.css')
+    body
+        div.container
+            div.heading
+                h1 Login
+            div.login-form
+                div.errors
+                    span #{errors}
+                form(method="post",action="/login")
+                    div.form-group
+                        label(for="email") email:
+                        input.form-control(type='text', name='email', placeholder='email ',required=true)
+                    div.form-group
+                        label(for="password") password:
+                        input.form-control(type='password', name='password', placeholder='password ',required=true)
+                    div.submit-btn
+                        button.btn(type='submit') Login

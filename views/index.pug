@@ -1,0 +1,65 @@
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/index.css')
+  body
+    div.container
+        div.header
+            div.heading.
+                Welcome to next Gen Power Control
+            div.button
+                button(onclick='openProfile()',name="submit").
+                    Profile
+        div.body
+            div.row-1
+                table
+                    title='PowerConsumption'
+                    //- div.table-column.
+                    //-     Appliance
+                    //- div.table-column.
+                    //-     Time
+                    //- div.table-column.
+                    //-     Power Usage
+                    thead  
+                        tr
+                            th='Appliance'
+                            th= 'Time'
+                            th= 'Power Usage'
+                    tbody
+                        for d in data
+                            
+                            tr
+                                td=d['name']
+                                td= d['time']
+                                td=d['power']+'W'
+                        tr
+                            td='A.C'
+                            td= '12'
+                            td='15W'
+                        tr
+                            td='Fridge'
+                            td= '20'
+                            td='30W'
+                        tr
+                            td='Fridge'
+                            td= '20'
+                            td='30W'
+                        tr
+                            td='Fridge'
+                            td= '20'
+                            td='30W'
+
+            div.row-2
+               table.first
+                thead
+                    tr
+                        th='Username'
+                        th='Total Power'
+                        th='Total Bill'
+                tbody
+                    tr
+                        td="Hemanth"
+                        td="55W"
+                        td="300rs"
+        .footer
+            h2  Footer

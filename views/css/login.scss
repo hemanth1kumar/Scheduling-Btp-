@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  //background-image: url("https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-color: #212f3c; //lightcoral;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.container {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  .heading {
+    flex: 1;
+    margin: auto;
+    h1 {
+      margin-top: 100px;
+      color: greenyellow;
+    }
+  }
+  .login-form {
+    flex: 4;
+    margin: 0 auto;
+    border: 3px solid magenta;
+    background-color: #515a5a; //#8990a7;
+    opacity: 0.9;
+    width: 40%;
+
+    .errors {
+      text-align: center;
+      color: red;
+      background: #111845a6;
+      height: auto;
+      font-size: 20px;
+    }
+    .errors:not(:empty) {
+      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      transform: translate3d(0, 0, 0);
+      border: 2px solid #f0a591;
+      font-family: "Comic Sans MS";
+      @keyframes shake {
+        10%,
+        90% {
+          transform: translate3d(-1px, 0, 0);
+        }
+        20%,
+        80% {
+          transform: translate3d(2px, 0, 0);
+        }
+
+        30%,
+        50%,
+        70% {
+          transform: translate3d(-4px, 0, 0);
+        }
+
+        40%,
+        60% {
+          transform: translate3d(4px, 0, 0);
+        }
+      }
+    }
+
+    .form-group {
+      width: 80%;
+      display: flex;
+      margin: 5% auto;
+      position: relative;
+      label {
+        color: yellow;
+        flex: 1;
+        margin-top: 15px;
+        font-size: 24px;
+      }
+      input {
+        flex: 3;
+        height: 40px;
+        border: 0;
+        background: none;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 20px;
+        border-bottom: 3px solid #c8ccd4;
+        transition-property: border-bottom-color;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-in;
+      }
+      input:focus {
+        background: none;
+        outline: none;
+        border-bottom-color: #52be80; //#0077ff;
+      }
+    }
+    .submit-btn {
+      width: 20%;
+      margin: 10px auto;
+      .btn {
+        border: none;
+        font-family: "Comic Sans MS";
+        font-weight: 600;
+        font-size: 20px;
+        width: 180px;
+        height: 40px;
+        background-color: cadetblue;
+      }
+      .btn:hover {
+        //border: 1px solid crimson;
+        box-shadow: 0 10px 10px #777;
+        transform: rotate(1deg);
+      }
+    }
+  }
+}
