@@ -5,17 +5,23 @@ profileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
-  state: {
-    type: String,
-    required: true
-  },
-  district: {
-    type: String,
-    required: true
-  },
-  street: {
-    type: String,
-    required: true
+  address: {
+    state: {
+      type: String,
+      required: true
+    },
+    district: {
+      type: String,
+      required: true
+    },
+    street: {
+      type: String,
+      required: true
+    },
+    house_no: {
+      type: String,
+      required: true
+    }
   }
 });
 

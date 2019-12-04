@@ -6,6 +6,7 @@ const session = require("express-session");
 const { check, validationResult } = require("express-validator");
 const Usage = require("../../models/Usage");
 router.use(express.urlencoded({ extended: true }));
+
 // User Registration
 router.post(
   "/",

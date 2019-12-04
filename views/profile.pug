@@ -1,0 +1,27 @@
+html
+    head
+        title Profile
+        link(rel='stylesheet', href='/css/profile.css')
+    body
+        .container
+            .heading
+                h1 Edit Profile
+            .body
+                .info
+                    .label-entry
+                        label(for="username") username
+                        input(type="text",name="username",value="name" readonly)
+                    .label-entry
+                        label(for="email")  Email
+                        input(type="text",name="email",value="abc@gmail.com" readonly)
+                    .label-entry
+                        label(for="state")  State
+                        input(type="text",name="state")
+                    .label-entry
+                        label(for="district")  District
+                        input(type="text",name="district")
+                    .label-entry
+                        label(for="street")  Street
+                        input(type="text",name="street")
+                    .button
+                        button Submit

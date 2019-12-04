@@ -2,6 +2,10 @@ html
   head
     title= title
     link(rel='stylesheet', href='/css/index.css')
+    script.
+        function openProfile(e) {
+            window.location.href = "/api/profile/?token="+"#{token}"
+        }
   body
     div.container
         div.header
@@ -63,3 +67,4 @@ html
                         td="300rs"
         .footer
             h2  Footer
+            //- h3  #{token}

@@ -8,6 +8,7 @@ html
                 h1 Login
             div.login-form
                 div.errors
+                    //- if(typeof(errors) !== 'undefined') {
                     span #{errors}
                 form(method="post",action="/login")
                     div.form-group
