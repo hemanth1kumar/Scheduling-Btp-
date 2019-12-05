@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://admin:Hem1234@cluster0-cp5ir.mongodb.net/power?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://admin:Hem1234@cluster0-cp5ir.mongodb.net/test?retryWrites=true&w=majority",
   "jwtToken": "secretKey"
 }

@@ -1,2 +1,3 @@
 Add JWT authentication in cookie !!
 change profile
+  //"mongoURI": "mongodb+srv://admin:Hem1234@cluster0-cp5ir.mongodb.net/power?retryWrites=true&w=majority",
