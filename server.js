@@ -29,10 +29,10 @@ app.use("/css", require("./routes/api/css"));
 // Connecing to DB
 db();
 
-app.use("/", (req, res, next) => {
-  console.log(req.url + ", " + req.method);
-  next();
-});
+// app.use("/", (req, res, next) => {
+//   console.log(req.url + ", " + req.method);
+//   next();
+// });
 
 app.get("/data", (req, res) => {
   res.send("Data Received");
