@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-const session = require("express-session");
 const { check, validationResult } = require("express-validator");
 const Usage = require("../../models/Usage");
 router.use(express.urlencoded({ extended: true }));

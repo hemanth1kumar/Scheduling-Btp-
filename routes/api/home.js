@@ -7,21 +7,21 @@ const config = require("config");
 const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 const session = require("express-session");
-router.use(
-  session({
-    secret: "secretKey",
-    resave: true,
-    saveUninitialized: true
-  })
-);
+// router.use(
+//   session({
+//     secret: "secretKey",
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );
 //Home Route
-router.all("/", (req, res) => {
-  if (req.session.userID) {
-    return res.redirect("/dashboard");
-    //return res.redirect("/dashboard");
-  }
-  res.redirect("/login");
-});
+// router.all("/", (req, res) => {
+//   if (req.session.userID) {
+//     return res.redirect("/dashboard");
+//     //return res.redirect("/dashboard");
+//   }
+//   res.redirect("/login");
+// });
 
 // Login Route
 router.all(
