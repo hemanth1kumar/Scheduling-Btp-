@@ -7,6 +7,7 @@ const auth = async (req, res, next) => {
     let token = req.header("token");
     token = req.session.token;
     token = req.query.token;
+    /// console.log(token);
 
     if (!token) return res.status(400).send("Not Authorized");
     const secretKey = config.get("jwtToken");

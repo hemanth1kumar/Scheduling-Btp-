@@ -34,6 +34,9 @@ db();
 //   next();
 // });
 
+app.get("/", (req, res) => {
+  res.redirect("/login");
+});
 app.get("/data", (req, res) => {
   res.send("Data Received");
 });
