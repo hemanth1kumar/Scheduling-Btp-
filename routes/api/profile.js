@@ -32,7 +32,6 @@ router.get("/", async (req, res) => {
     const profile = await Profile.findOne({ user: user.id });
     if (!profile) return res.status(400).send("Profile Not Found ");
 
-    //console.log(profile.address);
     return res.render("profile", { user, profile }, (err, html) => {
       if (err) {
         console.error(err);

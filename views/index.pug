@@ -32,20 +32,14 @@ html
                             th='Appliance'
                             th= 'RunTime'
                             th= 'Power Usage'
-                            th='Time'
+                            th='Date - Time'
                     tbody
-                        for d in data
-                            
+                        for d in data         
                             tr
                                 td=d['name']
                                 td= d['time']
                                 td=d['power']+'W'
                                 td=d['date']
-                        tr
-                            td='A.C'
-                            td= '12'
-                            td='15W'
-                            td='!8-39'
 
             div.row-2
                table.first
