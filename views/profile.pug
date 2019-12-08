@@ -2,11 +2,19 @@ html
     head
         title Profile
         link(rel='stylesheet', href='/css/profile.css')
+        script.
+            function destroySession(e) {
+                window.location.href = "/api/endsession"
+            }
     body
         .container
             .heading
-                h1 Edit Profile
+                .title  Profile
+                .button
+                    button(onclick='destroySession()',name="submit") logout
+                    
             .body
+                text welcome
                 .info
                     .label-entry
                         label(for="username") username
@@ -16,15 +24,16 @@ html
                         input(type="text",name="email",value=user.email readonly)
                     .label-entry
                         label(for="State")  State
-                        input(id="State" type="text",name="state",value=user.address.state)
+                        input(id="State" type="text",name="state",value=profile.address.state readonly)
                     .label-entry
                         label(for="district")  District
-                        input(type="text",name="district",value=user.address.district)
+                        input(type="text",name="district",value=profile.address.district  readonly)
                     .label-entry
                         label(for="street")  Street
-                        input(type="text",name="street",value=user.address.street)
+                        input(type="text",name="street",value=profile.address.street readonly)
                     .label-entry
                         label(for="house_no")  Street
-                        input(id="house_no" type="text",name="street",value=user.address.house_no)
-                    .button
-                        button Submit
+                        input(id="house_no" type="text",name="street",value=profile.address.house_no readonly)
+                    a(href="/api/dashboard")    go back to dashboard
+                    //- .button
+                    //-    button Submit

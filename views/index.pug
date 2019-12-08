@@ -4,7 +4,7 @@ html
     link(rel='stylesheet', href='/css/index.css')
     script.
         function openProfile(e) {
-            window.location.href = "/api/profile/?token="+"#{token}"
+            window.location.href = "/api/profile"
         }
   body
     div.container
@@ -12,8 +12,11 @@ html
             div.heading.
                 Welcome to next Gen Power Control
             div.button
-                button(onclick='openProfile()',name="submit").
-                    Profile
+                //- button(onclick='openProfile()',name="submit").
+                //-     Profile
+                a(href="/api/profile") Profile
+            .button
+                 a(href="/api/logout") Logout
         div.body
             div.row-1
                 table
@@ -27,8 +30,9 @@ html
                     thead  
                         tr
                             th='Appliance'
-                            th= 'Time'
+                            th= 'RunTime'
                             th= 'Power Usage'
+                            th='Time'
                     tbody
                         for d in data
                             
@@ -36,22 +40,12 @@ html
                                 td=d['name']
                                 td= d['time']
                                 td=d['power']+'W'
+                                td=d['date']
                         tr
                             td='A.C'
                             td= '12'
                             td='15W'
-                        tr
-                            td='Fridge'
-                            td= '20'
-                            td='30W'
-                        tr
-                            td='Fridge'
-                            td= '20'
-                            td='30W'
-                        tr
-                            td='Fridge'
-                            td= '20'
-                            td='30W'
+                            td='!8-39'
 
             div.row-2
                table.first

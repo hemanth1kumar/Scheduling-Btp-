@@ -7,10 +7,11 @@ html
             div.heading
                 h1 Login
             div.login-form
-                div.errors
-                    //- if(typeof(errors) !== 'undefined') {
-                    span #{errors}
-                form(method="post",action="/login")
+                
+                if(Object.keys(errors).length !== 0)
+                    div.errors
+                        span #{errors.msg}
+                form(method="post",action="/api//login")
                     div.form-group
                         label(for="email") email:
                         input.form-control(type='text', name='email', placeholder='email ',required=true)

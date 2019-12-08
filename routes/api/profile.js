@@ -2,41 +2,47 @@ const express = require("express");
 const router = express.Router();
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
 const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const config = require("config");
-router.use(express.json({ extended: false }));
-// router.use(
-//   session({
-//     secret: "secretKey",
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
-// router.use(cookieParser());
+var cookieSession = require("cookie-session");
 
-// Viewing profile route
-router.get("/", auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    const profile = await Profile.findOne({ user: req.user.id });
-    if (!user) return res.status(400).send("Invalid Credentials");
-    if (!profile) return res.status(400).send("Profile Not Found ");
-    if (req.session.userID) {
-      return res.render("profile", { user, profile }, (err, html) => {
-        if (err) {
-          console.error(err);
-          return res.status(404).send("HTTP 404 NOT FOUND");
-        }
-        res.send(html);
-      });
+router.use(express.json({ extended: false }));
+router.use(
+  cookieSession({
+    name: "session",
+    keys: ["secretKey"],
+    cookie: {
+      expiresIn: new Date(Date.now() + 60 * 60 * 1000)
     }
-    res.render("login", { errors: "Login to view Profile" });
+  })
+);
+// Viewing profile route
+router.get("/", async (req, res) => {
+  try {
+    if (req.session.user === undefined) {
+      // User not logged in
+      req.session.errors = { msg: "Login to view Profile" };
+      return res.redirect("/api/login");
+    }
+    //const user = await User.findById(req.user.id);
+    const user = await User.findOne({ email: req.session.user });
+    if (!user) return res.status(400).send("Invalid Credentials");
+    const profile = await Profile.findOne({ user: user.id });
+    if (!profile) return res.status(400).send("Profile Not Found ");
+
+    //console.log(profile.address);
+    return res.render("profile", { user, profile }, (err, html) => {
+      if (err) {
+        console.error(err);
+        return res.status(404).send("HTTP 404 NOT FOUND");
+      }
+      res.send(html);
+    });
+    // res.render("login", { errors: "Login to view Profile" });
   } catch (error) {
-    res.send("Server Error");
+    res.status(500).send("Server Error");
   }
 });
 
@@ -47,9 +53,7 @@ router.post(
     check("name", "Username cannot be empty")
       .not()
       .isEmpty(),
-    check("email", "Email is required")
-      .not()
-      .isEmail(),
+    check("email", "Email is required").isEmail(),
     check("state", "State cannot be empty")
       .not()
       .isEmpty(),
@@ -94,14 +98,24 @@ router.post(
     if (!isValid)
       return res.status(400).json({ errors: "Invalid Credentials" });
     const newProfile = new Profile({
-      name,
-      email,
-      password,
+      user: req.user.id,
       address
     });
-    await newProfile.save();
-    alert("Profile Update");
-    res.redirect("/profile");
+
+    let profile = await Profile.findOne({ user: req.user.id });
+    if (!profile) {
+      await newProfile.save();
+      return res.send("Profile Updated");
+    } else {
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { address: newProfile.address },
+        { new: true }
+      );
+      return res.send("Profile Updatedd");
+    }
+    //window.alert("Profile Update");
+    //res.redirect("/profile");
   }
 );
 module.exports = router;

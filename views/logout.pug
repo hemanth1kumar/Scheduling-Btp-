@@ -1,0 +1,14 @@
+html
+    head
+        title   Logout
+        link(rel='stylesheet', href='/css/logout.css')
+        script.
+            function AfterUpdate() {
+                window.setTimeout(function(){
+                    window.location = "/api/login";
+                 },2000);
+            }
+    
+    body(onload="AfterUpdate()")
+        .container
+            span User Logged Out ! Redirecting to login page .. please wait 

@@ -5,24 +5,19 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
+const auth2 = require("../../middleware/auth2");
 const auth = require("../../middleware/auth");
-const session = require("express-session");
-// router.use(
-//   session({
-//     secret: "secretKey",
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
-//Home Route
-// router.all("/", (req, res) => {
-//   if (req.session.userID) {
-//     return res.redirect("/dashboard");
-//     //return res.redirect("/dashboard");
-//   }
-//   res.redirect("/login");
-// });
+var cookieSession = require("cookie-session");
 
+router.use(
+  cookieSession({
+    name: "session",
+    keys: ["secretKey"],
+    cookie: {
+      expiresIn: new Date(Date.now() + 60 * 60 * 1000)
+    }
+  })
+);
 // Login Route
 router.all(
   "/login",
@@ -35,6 +30,9 @@ router.all(
       .isEmpty()
   ],
   async (req, res) => {
+    if (req.session.user) return res.redirect("/api/dashboard");
+    if (req.session.errors)
+      return res.render("login", { errors: req.session.errors });
     const errors = validationResult(req);
     if (!errors.isEmpty())
       return res.render("login", { errors: errors.array() });
@@ -46,8 +44,6 @@ router.all(
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) return res.render("login", { errors: "Invalid Credentials" });
-    req.session.userID = email;
-
     const payload = {
       user: {
         id: user.id
@@ -55,29 +51,29 @@ router.all(
     };
 
     // Token Generation
-    const token = jwt.sign(
-      payload,
-      config.get("jwtToken"),
-      { expiresIn: 3600 }
-      // (err, token) => {
-      //   if (err) return res.status(500).send("Token Error");
-
-      //   res.cookie("token", token, {
-      //     expires: new Date(Date.now + 900000),
-      //     httpOnly: true
-      //   });
-      // console.log(token);
-      // req.session.token = token;
-      //}
-    );
+    const token = jwt.sign(payload, config.get("jwtToken"), {
+      expiresIn: 3600
+    });
     res.set("token", token);
-    res.redirect(`/dashboard?token=${token}`);
+    req.session.user = email;
+    //res.redirect(`/dashboard?token=${token}`);
+    res.redirect("/api/dashboard");
   }
 );
 
 // Dashboard Route
-router.get("/dashboard", auth, async (req, res) => {
+router.get("/dashboard", async (req, res) => {
   try {
+    if (req.session.user === undefined) {
+      // User not logged in
+      //return res.redirect("/api/login");
+      const errors = {
+        msg: "Login to view Dashboard !"
+      };
+      req.session.errors = errors;
+      return res.redirect("/api/login");
+      //return res.render("login", { errors });
+    }
     const dbdata = await Usage.find();
     res.render(
       "index",
@@ -139,5 +135,11 @@ router.get("/favicon.ico", (req, res) => {
   res.sendFile("views/images/icon.png", {
     root: path.join(__dirname, "../../")
   });
+});
+
+// Ending Session
+router.get("/logout", (req, res) => {
+  req.session = null;
+  res.render("logout");
 });
 module.exports = router;

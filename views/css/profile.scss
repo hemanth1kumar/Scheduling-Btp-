@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  background-color: thistle;
+  //background-color: thistle;
+  background-image: linear-gradient(#2575e8, #8d25e8);
   //   overflow: hidden;
 }
 .container {
@@ -9,14 +10,44 @@ body {
   width: 90%;
   height: 100%;
   border: 1px solid black;
-  background-color: snow;
+  //background-color: snow;
 
   .heading {
     margin: auto auto;
-    border: 1px solid salmon;
+    //border: 1px solid salmon;
     width: 80%;
-    h1 {
-      padding-left: 3%;
+    height: 60px;
+    display: flex;
+    //background: #303030;
+    color: greenyellow;
+    .title {
+      margin: auto auto;
+      flex: 5;
+      font-size: 40px;
+    }
+    .button {
+      margin: auto auto;
+      flex: 1;
+      float: right;
+      width: 180px;
+      button {
+        font-size: 18px;
+        padding: 10px;
+        border: 1px solid #009999;
+        box-sizing: border-box;
+        width: 100px;
+        border-radius: 10%;
+        background-color: black;
+        color: #009999;
+        transition: background-color 1s ease;
+        //background-image: linear-gradient(to right, #ecf0f1, #1896af);
+      }
+      button:hover {
+        // box-shadow: 1px 1px 2px 1px #c0c0c0;
+        color: crimson;
+        font-weigth: 600;
+        background-color: floralwhite;
+      }
     }
   }
   .body {
@@ -43,28 +74,16 @@ body {
           flex: 3;
           padding: 8px;
           font-size: 16px;
+          color: black;
           //border: none;
         }
       }
-    }
-  }
-  .button {
-    width: 200px;
-    margin: auto auto;
-    padding-top: 10px;
-    button {
-      font-weight: 600;
-      font-size: 16px;
-      padding: 10px;
-      border: none;
-      box-sizing: border-box;
-      border-radius: 10%;
-      width: 100px;
-      background-color: #f44336;
-      //background-image: linear-gradient(to right, #ecf0f1, #1896af);
-    }
-    button:hover {
-      //   box-shadow: 2px 2px 3px slateblue;
+      a {
+        width: 30%;
+        margin-left: 200px;
+        margin-right: 200px;
+        color: thistle;
+      }
     }
   }
 }

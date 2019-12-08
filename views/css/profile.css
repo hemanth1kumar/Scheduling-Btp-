@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  background-color: thistle;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2575e8), to(#8d25e8));
+  background-image: linear-gradient(#2575e8, #8d25e8);
 }
 
 .container {
@@ -9,17 +10,53 @@ body {
   width: 90%;
   height: 100%;
   border: 1px solid black;
-  background-color: snow;
 }
 
 .container .heading {
   margin: auto auto;
-  border: 1px solid salmon;
   width: 80%;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: greenyellow;
 }
 
-.container .heading h1 {
-  padding-left: 3%;
+.container .heading .title {
+  margin: auto auto;
+  -webkit-box-flex: 5;
+      -ms-flex: 5;
+          flex: 5;
+  font-size: 40px;
+}
+
+.container .heading .button {
+  margin: auto auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  float: right;
+  width: 180px;
+}
+
+.container .heading .button button {
+  font-size: 18px;
+  padding: 10px;
+  border: 1px solid #009999;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100px;
+  border-radius: 10%;
+  background-color: black;
+  color: #009999;
+  -webkit-transition: background-color 1s ease;
+  transition: background-color 1s ease;
+}
+
+.container .heading .button button:hover {
+  color: crimson;
+  font-weigth: 600;
+  background-color: floralwhite;
 }
 
 .container .body {
@@ -58,23 +95,13 @@ body {
           flex: 3;
   padding: 8px;
   font-size: 16px;
+  color: black;
 }
 
-.container .button {
-  width: 200px;
-  margin: auto auto;
-  padding-top: 10px;
-}
-
-.container .button button {
-  font-weight: 600;
-  font-size: 16px;
-  padding: 10px;
-  border: none;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border-radius: 10%;
-  width: 100px;
-  background-color: #f44336;
+.container .body .info a {
+  width: 30%;
+  margin-left: 200px;
+  margin-right: 200px;
+  color: thistle;
 }
 /*# sourceMappingURL=profile.css.map */

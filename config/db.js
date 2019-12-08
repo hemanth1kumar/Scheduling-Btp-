@@ -6,6 +6,7 @@ const connectDB = async () => {
   try {
     await mongoose.connect(db, {
       useUnifiedTopology: true,
+      useFindAndModify: false,
       //useUnifiedTopology:process.env.USE_UNIFIED_TOPOLOGY || false,
       useNewUrlParser: true
     });

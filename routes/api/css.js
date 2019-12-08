@@ -34,4 +34,14 @@ router.get("/profile.css", (req, res) => {
   );
 });
 
+router.get("/logout.css", (req, res) => {
+  res.sendFile(
+    "/views/css/logout.css",
+    { root: path.join(__dirname, "../../") },
+    err => {
+      if (err)
+        return res.status(err.status).json({ msg: "Error rendering file" });
+    }
+  );
+});
 module.exports = router;

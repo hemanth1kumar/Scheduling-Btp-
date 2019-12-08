@@ -12,6 +12,10 @@ UsageSchema = new mongoose.Schema({
   power: {
     type: Number,
     required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 
