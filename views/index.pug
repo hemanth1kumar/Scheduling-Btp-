@@ -32,6 +32,7 @@ html
                             th='Appliance'
                             th= 'RunTime'
                             th= 'Power Usage'
+                            th='Cost'
                             th='Date - Time'
                     tbody
                         for d in data         
@@ -39,6 +40,7 @@ html
                                 td=d['name']
                                 td= d['time']
                                 td=d['power']+'W'
+                                td=d['cost']
                                 td=d['date']
 
             div.row-2

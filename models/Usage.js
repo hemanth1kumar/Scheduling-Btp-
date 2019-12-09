@@ -18,6 +18,10 @@ UsageSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  cost: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now

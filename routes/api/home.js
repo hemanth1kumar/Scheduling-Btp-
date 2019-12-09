@@ -9,6 +9,7 @@ const auth2 = require("../../middleware/auth2");
 const auth = require("../../middleware/auth");
 var cookieSession = require("cookie-session");
 const User = require("../../models/User");
+const Usage = require("../../models/Usage");
 router.use(
   cookieSession({
     name: "session",
@@ -74,7 +75,7 @@ router.get("/dashboard", async (req, res) => {
       return res.redirect("/api/login");
       //return res.render("login", { errors });
     }
-    const dbdata = await Usage.find();
+    const dbdata = await Usage.find({ email: req.session.user });
     res.render(
       "index",
       {
@@ -160,16 +161,18 @@ router.all(
 // Insertion through parameter
 router.post("/insertdata", async (req, res) => {
   try {
-    const { token, name, time, power } = req.body;
+    const { token, name, time, power, cost } = req.body;
     console.log(token);
     if (!token) return res.status(400).send("Not Authorised");
     const decoded = jwt.verify(token, config.get("jwtToken"));
     const user = await User.findById(decoded.user.id);
+    // console.log(user.name);
     const newEntry = new Usage({
       user: user.id,
       name,
       power,
-      time
+      time,
+      cost
     });
     if (name) newEntry.name = name;
     if (time) newEntry.time = time;
