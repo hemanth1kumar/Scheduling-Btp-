@@ -158,16 +158,15 @@ router.all(
 );
 
 // Insertion through parameter
-router.post("/insertdata", [], async (req, res) => {
+router.post("/insertdata", async (req, res) => {
   try {
-    const { token } = req.body;
+    const { token, name, time, power } = req.body;
     console.log(token);
     if (!token) return res.status(400).send("Not Authorised");
     const decoded = jwt.verify(token, config.get("jwtToken"));
     const user = await User.findById(decoded.user.id);
-
-    const { name, time, power } = req.body;
     const newEntry = new Usage({
+      user: user.id,
       name,
       power,
       time
