@@ -136,6 +136,10 @@ router.all(
       const { email, password } = req.body;
 
       const user = await User.findOne({ email });
+      if (!user) return res.render("login", { errors: "Invalid Credentials" });
+      const isValid = await bcrypt.compare(password, user.password);
+      if (!isValid)
+        return res.render("login", { errors: "Invalid Credentials" });
       const payload = {
         user: {
           id: user.id
@@ -157,11 +161,12 @@ router.all(
 router.post("/insertdata", [], async (req, res) => {
   try {
     const { token } = req.body;
+    console.log(token);
     if (!token) return res.status(400).send("Not Authorised");
     const decoded = jwt.verify(token, config.get("jwtToken"));
     const user = await User.findById(decoded.user.id);
 
-    const { name, time, power } = req.query;
+    const { name, time, power } = req.body;
     const newEntry = new Usage({
       name,
       power,
