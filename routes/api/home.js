@@ -8,7 +8,7 @@ const { check, validationResult } = require("express-validator");
 const auth2 = require("../../middleware/auth2");
 const auth = require("../../middleware/auth");
 var cookieSession = require("cookie-session");
-
+const User = require("../../models/User");
 router.use(
   cookieSession({
     name: "session",
@@ -97,8 +97,70 @@ router.get("/dashboard", async (req, res) => {
 });
 
 // Insertion through parameter
-router.post("/insertdata", async (req, res) => {
+// router.post("/insertdata", async (req, res) => {
+//   try {
+//     const { name, time, power } = req.query;
+//     const newEntry = new Usage({
+//       name,
+//       power,
+//       time
+//     });
+//     if (name) newEntry.name = name;
+//     if (time) newEntry.time = time;
+//     if (power) newEntry.power = power;
+
+//     if (!name || !power || !time)
+//       return res.status(400).send("No data to insert");
+//     await newEntry.save();
+//     res.json({ msg: "Data inserted into MongoDB" });
+//   } catch (error) {
+//     res.status(500).send("Server Error");
+//   }
+// });
+
+router.all(
+  "/pi/login",
+  [
+    check("email", "Email is required")
+      .not()
+      .isEmpty(),
+    check("password", "Password is required")
+      .not()
+      .isEmpty()
+  ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      const msg = errors.array().map(error => error.msg);
+      if (!errors.isEmpty()) return res.json({ msg: msg });
+      const { email, password } = req.body;
+
+      const user = await User.findOne({ email });
+      const payload = {
+        user: {
+          id: user.id
+        }
+      };
+      // Token Generation
+      const token = jwt.sign(payload, config.get("jwtToken"), {
+        expiresIn: 3600
+      });
+      res.send(token);
+    } catch (error) {
+      console.log(error.msg);
+      res.status(5000).send("Server Error");
+    }
+  }
+);
+
+// Insertion through parameter
+router.post("/insertdata", [], async (req, res) => {
   try {
+    const { token } = req.body;
+    if (!token) return res.status(400).send("Not Authorised");
+    const decoded = jwt.verify(token, config.get("jwtToken"));
+    const user = await User.findById(decoded.user.id);
+
     const { name, time, power } = req.query;
     const newEntry = new Usage({
       name,
@@ -111,17 +173,14 @@ router.post("/insertdata", async (req, res) => {
 
     if (!name || !power || !time)
       return res.status(400).send("No data to insert");
-    // const newEntry = new Usage({
-    //   name,
-    //   time,
-    //   power
-    // });
     await newEntry.save();
     res.json({ msg: "Data inserted into MongoDB" });
   } catch (error) {
+    console.log(error);
     res.status(500).send("Server Error");
   }
 });
+
 // Insert Data Route
 // router.post(
 //   "/insertdata",
