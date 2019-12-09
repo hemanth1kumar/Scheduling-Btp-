@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #212f3c;
+  background-color: #34495e;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -26,6 +26,7 @@ body {
 
 .container .heading h1 {
   margin-top: 100px;
+  margin-right: 25px;
   color: greenyellow;
 }
 
@@ -34,8 +35,7 @@ body {
       -ms-flex: 4;
           flex: 4;
   margin: 0 auto;
-  border: 3px solid magenta;
-  background-color: #515a5a;
+  background-color: #117c74;
   opacity: 0.9;
   width: 40%;
 }
@@ -53,7 +53,6 @@ body {
           animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
-  border: 2px solid #f0a591;
   font-family: "Comic Sans MS";
 }
 
@@ -115,7 +114,6 @@ body {
 }
 
 .container .login-form .form-group label {
-  color: yellow;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -145,7 +143,7 @@ body {
 .container .login-form .form-group input:focus {
   background: none;
   outline: none;
-  border-bottom-color: #52be80;
+  border-bottom-color: black;
 }
 
 .container .login-form .submit-btn {

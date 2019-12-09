@@ -30,9 +30,9 @@ body {
 }
 
 .container .footer {
-  margin-top: -1%;
+  font-size: 18px;
   height: 10%;
-  background-color: goldenrod;
+  background-color: #5a7590;
 }
 
 h2 {
@@ -91,6 +91,10 @@ a {
   font-size: 18px;
   margin: auto auto;
   color: #800080;
+}
+
+li {
+  display: none;
 }
 
 table {

@@ -75,12 +75,21 @@ router.get("/dashboard", async (req, res) => {
       return res.redirect("/api/login");
       //return res.render("login", { errors });
     }
-    const dbdata = await Usage.find({ email: req.session.user });
+    const curUser = await User.findOne({ email: req.session.user });
+    //console.log(curUser.name);
+    const dbdata = await Usage.find();
+    const reqData = dbdata.map(row => {
+      if (row.user == curUser.id) return row;
+    });
+    // reqData.map(data => {
+    //   if (data) console.log(data.name);
+    // });
     res.render(
       "index",
       {
         title: "WebPage",
-        data: dbdata,
+        data: reqData,
+        user: curUser.name,
         token: req.query.token
       },
       (err, html) => {
@@ -162,7 +171,7 @@ router.all(
 router.post("/insertdata", async (req, res) => {
   try {
     const { token, name, time, power, cost } = req.body;
-    console.log(token);
+    //console.log(token);
     if (!token) return res.status(400).send("Not Authorised");
     const decoded = jwt.verify(token, config.get("jwtToken"));
     const user = await User.findById(decoded.user.id);
@@ -177,9 +186,10 @@ router.post("/insertdata", async (req, res) => {
     if (name) newEntry.name = name;
     if (time) newEntry.time = time;
     if (power) newEntry.power = power;
+    if (cost) newEntry.cost = cost;
 
-    if (!name || !power || !time)
-      return res.status(400).send("No data to insert");
+    if (!name || !power || !time || !cost)
+      return res.status(400).send("Insufficient Data");
     await newEntry.save();
     res.json({ msg: "Data inserted into MongoDB" });
   } catch (error) {

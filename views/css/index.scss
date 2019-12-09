@@ -23,9 +23,9 @@ body {
   }
 
   .footer {
-    margin-top: -1%;
+    font-size: 18px;
     height: 10%;
-    background-color: goldenrod;
+    background-color: #5a7590;
   }
 }
 h2 {
@@ -74,6 +74,9 @@ a {
   margin: auto auto;
   color: #800080;
 }
+li {
+  display: none;
+}
 table {
   margin: 2% 0 0 10%;
   color: white;
@@ -117,6 +120,7 @@ th {
   text-transform: uppercase;
 }
 td {
+  //width: 50px;
   padding: 15px;
   text-align: left;
   vertical-align: middle;

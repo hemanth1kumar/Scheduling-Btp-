@@ -29,19 +29,30 @@ html
                     //-     Power Usage
                     thead  
                         tr
+                            th='S.no'
                             th='Appliance'
                             th= 'RunTime'
                             th= 'Power Usage'
                             th='Cost'
                             th='Date - Time'
                     tbody
-                        for d in data         
-                            tr
-                                td=d['name']
-                                td= d['time']
-                                td=d['power']+'W'
-                                td=d['cost']
-                                td=d['date']
+                        -for(var i=0;i<3;i++)
+                            li #{i}
+                        -var i=0
+                        -var totalPower=0
+                        -var totalCost=0
+                        for d,index in data
+                            if(d)  
+                                    li  #{i++}
+                                    li  #{totalPower= totalPower+d['power']}
+                                    li  #{totalCost= totalCost+parseInt(d['cost'])}
+                                    tr
+                                        td  #{i}
+                                        td=d['name']
+                                        td= d['time']
+                                        td=d['power']+'W'
+                                        td=d['cost'] +' Rs'
+                                        td=d['date']
 
             div.row-2
                table.first
@@ -52,9 +63,10 @@ html
                         th='Total Bill'
                 tbody
                     tr
-                        td="Hemanth"
-                        td="55W"
-                        td="300rs"
+                        td=user.toUpperCase()
+                        td #{totalPower}W
+                        td #{totalCost} Rs
+                    
         .footer
             h2  Footer
             //- h3  #{token}

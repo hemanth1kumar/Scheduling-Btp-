@@ -1,7 +1,7 @@
 body {
   margin: 0;
   //background-image: url("https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  background-color: #212f3c; //lightcoral;
+  background-color: #34495e; //snow; //#29d7ca; //lightcoral;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -15,14 +15,15 @@ body {
     margin: auto;
     h1 {
       margin-top: 100px;
+      margin-right: 25px;
       color: greenyellow;
     }
   }
   .login-form {
     flex: 4;
     margin: 0 auto;
-    border: 3px solid magenta;
-    background-color: #515a5a; //#8990a7;
+
+    background-color: #117c74;
     opacity: 0.9;
     width: 40%;
 
@@ -36,7 +37,7 @@ body {
     .errors:not(:empty) {
       animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
       transform: translate3d(0, 0, 0);
-      border: 2px solid #f0a591;
+      //border: 2px solid #f0a591;
       font-family: "Comic Sans MS";
       @keyframes shake {
         10%,
@@ -67,7 +68,7 @@ body {
       margin: 5% auto;
       position: relative;
       label {
-        color: yellow;
+        //color: yellow;
         flex: 1;
         margin-top: 15px;
         font-size: 24px;
@@ -88,7 +89,7 @@ body {
       input:focus {
         background: none;
         outline: none;
-        border-bottom-color: #52be80; //#0077ff;
+        border-bottom-color: black; //#52be80; //#0077ff;
       }
     }
     .submit-btn {
